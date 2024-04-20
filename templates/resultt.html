@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Viewer</title>
+    <style>
+    body {
+        background-color: #fff; /* Set background color */
+        padding: 10px; /* Add some padding */
+        position: relative; /* Set position to relative */
+        height: 100vh; /* Set body height to viewport height */
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        color: white;
+    }
+
+    .container {
+        background-color: #1d2145; /* White background color */
+        border-radius: 30px; /* Rounded corners */
+        padding: 10px; /* Add some padding */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow */
+        width: 99.5%; /* Set width to 95% */
+        height: 99%;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: auto;
+    }
+
+    th, td {
+        border: 5px solid #282b4d;
+        /* text-align: left; */
+        padding: 8px;
+    }
+
+    th {
+        background-color: #1d2145;
+    }
+    .center-text {
+        text-align: center; /* Center text horizontally */
+    }
+</style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Your content goes here -->
+        <h1>Prediction Result</h1>
+        {% if classification %}
+            <p>The query is classified as: {{ classification }}</p>
+        {% else %}
+            <p>No classification result available</p>
+        {% endif %}
+        <h1 class="center-text">Log Viewer</h1>
+        <table>
+            <thead>
+                <tr style="text-align: center;">
+                    <th>ID</th>
+                    <th>Query</th>
+                    <th>Classification</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log[0] }}</td>
+                    <td>{{ log[1] }}</td>
+                    <td>{{ log[2] }}</td>
+                    <td>{{ log[3] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
