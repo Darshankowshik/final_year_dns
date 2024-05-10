@@ -953,6 +953,14 @@
     <script src="../static/dist/js/honey-ball-src/honey-ball.js"></script>
     <script src="../static/dist/js/honey-ball-src/main-three-scene.js"></script>
     <script src="../static/dist/js/main-decompressed.js"></script>
+    <!-- Add this script at the end of the file -->
+    <script>
+    // Redirect to the /pre route after form submission
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+             window.location.href = '/pre'; // Redirect to the /pre route
+        });
+    </script>
     <!-- <script src="dist/0.147.0/three.min.js"
         integrity="sha512-GWXLkqxMENYgBdQvA/lTeOV+R2auhasgKQxjMTWBFt3Z6GJVZ9owiyAMOzz0Wt6J1ri8bf/g2kHJV0uvWpJTuw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->

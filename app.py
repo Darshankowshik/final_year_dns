@@ -18,7 +18,7 @@ model_file_path = 'decision_tree_model.joblib'
 # Load the model from disk
 loaded_model_dag = joblib.load(model_file_path)
 loaded_model_tunnel = joblib.load('model_tunnel.pkl')
-classification=""
+classification= None
 
 def calculate_entropy(text):
     if not text: 
@@ -62,11 +62,16 @@ def insert_log(query, classification, timestamp):
     conn.close()
 
 # Function to retrieve all logs from SQLite database
-def fetch_logs():
-    conn = sqlite3.connect('logs.db')
-    df = pd.read_sql_query("SELECT * FROM logs", conn)
-    conn.close()
-    return df.to_dict('records')
+def fetch_logs_from_database():
+    try:
+        conn = sqlite3.connect('logs.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM logs ORDER BY timestamp DESC")
+        logs = cursor.fetchall()
+        return logs
+    except sqlite3.Error as e:
+        print("Error fetching logs:", e)
+        return []
 
 def classify_query(query):
     # Read the dataset
@@ -91,31 +96,17 @@ def classify_query(query):
         result = loaded_model_dag.predict([feature_values])
         print(result,'1')
         return result
-    
-    '''# Predict with the loaded model
-    predicted_label = loaded_model_dns.predict([feature_values])
-
-    print("Predicted Label:", predicted_label)
-    return "Malicious" if predicted_label == 1 else "Benign"'''
-
+   
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    # Fetch logs from the database
-    conn = sqlite3.connect('logs.db')
-    c = conn.cursor()
-    c.execute("SELECT * FROM logs")
-    logs = c.fetchall()
-    conn.close()
-    # if request.method == 'POST':
-    #     return render_template('resultt.html', classification='Benign')
     print("web page started")
     return render_template('studio.html')
-    # return render_template('test.html')
-
+   
 
 @app.route('/predict',methods=['POST','GET'])
 def predict():
+    global classification
     data = request.form['mail']
     request.data.decode('utf-8')
     if data:
@@ -151,27 +142,18 @@ def predict():
     insert_log(query, classification , timestamp)
     print("Entering here!")
         
-    return render_template('resultt.html', classification=classification)
+    return "render"
 
-#def predict():
-     #Input data
-    #print("enter data")
-    #input_data = request.form['mail']
-    #print(input_data)
-    #return render_template('predict.html')
-    # # Step 1: Predict using DNS tunnel model
-    # dns_result_tun = predict1(input_data)
 
-    # # Step 2: Check DNS result
-    # if dns_result_tun == 1:
-    #     print("Malicious")
-    #     return render_template('forest_fire.html',pred='Your Forest is in Danger.\nProbability of fire occuring is ',bhai="kuch karna hain iska ab?")
-    # else:
-    #     print("Benign")
-    #     return render_template('forest_fire.html',pred='Your Forest is safe.\n Probability of fire occuring is ',bhai="Your Forest is Safe for now")
+@app.route('/pre')
+def pre():
+    global classification
+    print(classification)
+    logs = fetch_logs_from_database()
+    return render_template('predict.html', classification=classification,logs=logs)
 
 
 if __name__ == '__main__':
     create_connection()  # Create database and initialize logs table
-    app.run(debug=True)
+    app.run(debug=True,host='127.0.0.2', port=5001)
     
