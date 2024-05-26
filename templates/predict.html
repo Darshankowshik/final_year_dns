@@ -43,6 +43,9 @@
     .center-text {
         text-align: center; /* Center text horizontally */
     }
+    .container{
+        overflow: auto; /* Add scroll bar to container */
+    }
 </style>
 </head>
 
@@ -50,8 +53,19 @@
     <div class="container">
         <!-- Your content goes here -->
         <h1>Prediction Result</h1>
-        {% if classification %}
+        <!--{% if classification %}
             <p>The query is classified as: {{ classification }}</p>
+        {% else %}
+            <p>No classification result available</p>
+        {% endif %}-->
+        {% if classification %}
+            {% if classification == 'Benign' %}
+                <p><span>The query is classified as: </span><span style="color: green;">{{ classification }}</span></p>
+            {% elif classification == 'Malicious' %}
+                <p><span>The query is classified as: </span><span style="color: red;">{{ classification }}</span></p>
+            {% elif classification == 'Unknown' %}
+                <p><span>The query is classified as: </span><span style="color: yellow;">{{ classification }}</span></p>
+            {% endif %}
         {% else %}
             <p>No classification result available</p>
         {% endif %}
@@ -78,9 +92,8 @@
         </table>
     </div>
     <script>
-        // Reload the page every 5 seconds (5000 milliseconds)
-        setTimeout(function(){
-            location.reload();
-        }, 1000);
+        window.onload = function() {
+            history.go(0); // Reload the page once using history.go
+        };
     </script>
 </body>

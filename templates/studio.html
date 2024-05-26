@@ -157,10 +157,10 @@
         </div>
         <div id="magic-keys" class="bs-80 center">
             <p>might contain</p>
-            <p>Malware</p>
-            <p>Virus</p>
-            <p>Phishing Link</p>
-            <p>spyware</p>
+            <p>DGA</p>
+            <p>Tunnel</p>
+            <!-- <p>Phishing Link</p>
+            <p>spyware</p> -->
             <!-- <p>clients</p> -->
         </div>
         <div id="magic-close">
@@ -199,12 +199,12 @@
         </a> -->
         <!-- PATTERN BG -->
         <div class="scrollPattern">
-            <div class="patternTop">
-                <img class="lazy" src="img/pattern-top-prel.png" data-src="../img/pattern-top.webp" data-src-big="../img/pattern-top.webp" alt="Hexagon line pattern png image">
+            <!-- <div class="patternTop">
+                <img class="lazy" src="img/pattern-top-prel.png" data-src="../img/pattern-top.webp" data-src-big="../img/pattern-top.webp" >
             </div>
             <div class="patternBottom">
-                <img class="lazy" src="img/pattern-bottom-prel.png" data-src="../img/pattern-bottom.webp" data-src-big="../img/pattern-bottom.webp" alt="Hexagon line pattern png image">
-            </div>
+                <img class="lazy" src="img/pattern-bottom-prel.png" data-src="../img/pattern-bottom.webp" data-src-big="../img/pattern-bottom.webp" al>
+            </div> -->
         </div>
 
         <div id="drag-ico">
@@ -249,9 +249,9 @@
                 <div>
                     <h1>
                         <div class="bs-160 bs-xl-12 bs-xs-22">Beware of</div>
-                        <div class="bs-160 bs-xl-12 right bs-xs-22 bs-sm-os-0">the <span class="red" id="easterEgg" data-scroll="hero">Link</span></div>
+                        <div class="bs-160 bs-xl-12 right bs-xs-22 bs-sm-os-0">the <span class="red" id="easterEgg" data-scroll="hero">Domain</span></div>
                         <div class="bs-160 bs-xl-12 bs-xl-os-6 bs-sm-10 bs-sm-os-8 bs-xs-18 bs-xs-os-4 sm-top-1 right offset">You</div>
-                        <div class="bs-160 bs-xl-12 bs-xl-os-6 bs-sm-10 bs-sm-os-8 bs-xs-18 bs-xs-os-4 right">click on</div>
+                        <div class="bs-160 bs-xl-12 bs-xl-os-6 bs-sm-10 bs-sm-os-8 bs-xs-18 bs-xs-os-4 right">access</div>
                     </h1>
                     <!-- <div class="scroll-to" data-scroll="about-intro">
                         <div class="bs-tech">(&nbsp;&nbsp;&nbsp;SCROLL&nbsp;&nbsp;&nbsp;)</div>
@@ -277,7 +277,7 @@
             </section> -->
             <div class="bs-xl-22 bs-xl-os-1">
                 <div class="bs-xl-10 bs-xl-os-9 bs-xs-22 bs-xs-os-0">
-                    <h3 class="contact-link bs-120 upper"><a  class="mask-link" data-id="Check site status"  aria-label="Check site status"><span>Check site status</span><i
+                    <h3 class="contact-link bs-120 upper"><a  class="mask-link" data-id="Check site status"  aria-label="Check site status"><span>Check Domain status</span><i
                         class="dot work-dot"><svg viewBox="0 0 10 11" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -960,6 +960,13 @@
             event.preventDefault(); // Prevent the default form submission
              window.location.href = '/pre'; // Redirect to the /pre route
         });
+    </script>
+    <script>
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                location.reload();
+            }
+        };
     </script>
     <!-- <script src="dist/0.147.0/three.min.js"
         integrity="sha512-GWXLkqxMENYgBdQvA/lTeOV+R2auhasgKQxjMTWBFt3Z6GJVZ9owiyAMOzz0Wt6J1ri8bf/g2kHJV0uvWpJTuw=="

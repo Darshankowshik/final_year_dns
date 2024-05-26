@@ -122,7 +122,6 @@ def predict():
         classification='Malicious'
     else:
         #print("Benign")
-
         dga_result = classify_query(query)
         if dga_result == 1:
             print("Benign")
@@ -142,7 +141,7 @@ def predict():
     insert_log(query, classification , timestamp)
     print("Entering here!")
         
-    return "render"
+    return "Classification done"
 
 
 @app.route('/pre')
